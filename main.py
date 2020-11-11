@@ -1,6 +1,6 @@
 #Imports
 import json
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, abort
 from functools import wraps
 from modals import db_drop_and_create_all, setup_db, Product
 
@@ -38,34 +38,54 @@ def new_product():
     quantity = jsonBody.get('quan')
     name = jsonBody.get('des')
     image_link = jsonBody.get('picUrl')
-
-    product = Product(id=id, price=price, quantity=quantity, name=name, image_link=image_link)
-    product.insert()
-    return jsonify({'success': True})
+    try:
+        product = Product(id=id, price=price, quantity=quantity, name=name, image_link=image_link)
+        product.insert()
+        return jsonify({'success': True})
+    except:
+         abort(400)
 
 @app.route('/product', methods=['PATCH'])
 def edit_product():
-    jsonBody = request.get_json()
-    id = jsonBody.get('id')
-    product = Product.query.get(id)
+    try:
+        jsonBody = request.get_json()
+        id = jsonBody.get('id')
+        product = Product.query.get(id)
 
-    price = jsonBody.get('price')
-    print(price)
-    if price:
-        product.price=price
+        price = jsonBody.get('price')
+        print(price)
+        if price:
+            product.price=price
 
-    quantity = jsonBody.get('quan')
-    if quantity:
-        product.quantity=quantity
+        quantity = jsonBody.get('quan')
+        if quantity:
+            product.quantity=quantity
 
-    name = jsonBody.get('des')
-    if name:
-        product.name=name
+        name = jsonBody.get('des')
+        if name:
+            product.name=name
 
-    image_link = jsonBody.get('picUrl')
-    if image_link:
-        product.image_link=image_link
+        image_link = jsonBody.get('picUrl')
+        if image_link:
+            product.image_link=image_link
 
-    product.update()
+        product.update()
+        return jsonify({'success': True})
+    except:
+        abort(400)
 
-    return jsonify({'success': True})
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({
+        "success": False,
+        "error": 400,
+        "message": "Bad request"
+    }), 400
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+        "success": False,
+        "error": 404,
+        "message": "Not found"
+    }), 404

@@ -9,7 +9,7 @@ import json
 # project_dir = os.path.dirname(os.path.abspath(__file__))
 # DATABASE_URL = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
 
-DATABASE_URL = [os.getenv('DATABASE_URL')]
+DATABASE_URL = os.getenv('DATABASE_URL')
 db = SQLAlchemy()
 
 '''

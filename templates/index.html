@@ -501,6 +501,7 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                     return response.json();
                 })
                 .then(function (jsonResponse) {
+                    console.log(jsonResponse);
                     if (jsonResponse[success]=='false'){
                         Msg.error('Error: product with the given id was not found', 2000);
                     }else{

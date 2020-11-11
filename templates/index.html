@@ -30,82 +30,82 @@
     <script>
         let products = [];
 
-        function addToCart(id, name, price, pic){
-            var productQuantity = document.getElementById("product_"+id+"_Q").value;
-            
-            if(localStorage.getItem('products')){ // user already have some products
+        function addToCart(id, name, price, pic) {
+            var productQuantity = document.getElementById("product_" + id + "_Q").value;
+
+            if (localStorage.getItem('products')) { // user already have some products
                 products = JSON.parse(localStorage.getItem('products')); // get it
             }
             products.push({
-              'productId' : id,
-              'name': name,
-              'price': price,
-              'quantity': productQuantity,
-              'pic' : pic,
+                'productId': id,
+                'name': name,
+                'price': price,
+                'quantity': productQuantity,
+                'pic': pic,
             });
             localStorage.setItem('products', JSON.stringify(products));
             AddProductToCartModal(id, name, price, pic, productQuantity);
             Msg.success('Product added', 2000);
-          }
-                 
-          function loadCart(){
-            if(localStorage.getItem('products')){ // user already have some products
-              products = JSON.parse(localStorage.getItem('products')); // get it
-              products.forEach(p => {
-                AddProductToCartModal(p.id, p.name, p.price, p.pic, p.quantity);
-              });
-            }
-          }
-          
-          function openCartModal(){
-            if (products === undefined || products.length == 0) {
-              Msg.error("Cart is empty :)", 2000);
-          }else{
-              $('#cartModal').modal('show')
-            }
-          }
-
-          
-function AddProductToCartModal(id, name, price, pic, quantity){
-  
-    var modalHTML = '<div id=carProduct_'+id+' class="container">'+
-    '    <div class="col mb-4">'+
-    '        <div class="card shadow border-left-primary py-2">'+
-    '            <div class="card-body">'+
-    '                <div class="row align-items-center no-gutters">'+
-    '                    <div class="col mr-2">'+
-    '                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>'+name+'</span></div>'+
-    '                        <div class="text-dark font-weight-bold h5 mb-0"><span>'+price+' SR</span></div>'+
-    '                        <div class="text-dark font-weight-bold h6 mb-0"><span> '+quantity+' Peaces</span></div>'+
-    '                    </div>'+
-    '                    <div class="col-auto"><img src="'+pic+'" style="max-width: 100px;max-height: 100px;" /></div>'+
-    '                </div>'+
-    '                <div class="row d-flex justify-content-center no-gutters" style="padding-top: 5%;">'+
-    '                    <div class="col-auto text-center"><span style="font-size: 25px;"> Total: '+(quantity*price)+' SR</span><button class="btn btn-danger" type="button" onclick="deleteFromCart('+id+')">Remove Item</button></div>'+
-    '                </div>'+
-    '            </div>'+
-    '        </div>'+
-    '    </div>'+
-    '</div>';
-    $("#CartModalBody").append(modalHTML);
-}
-
-    function deleteFromCart(id){
-        // removing product modal from cart
-        var productModal = document.getElementById("carProduct_"+id);
-        productModal.remove(); 
-        // removing it from the products list
-        for (let index = 0; index < products.length; index++) {
-          if (products[index].id == id){
-            products.splice(index, 1);
-            break;
-          }
         }
-      
-        // updating the storage
-        localStorage.setItem('products', JSON.stringify(products));
-        Msg.success('Product deleted', 2000);
-      }
+
+        function loadCart() {
+            if (localStorage.getItem('products')) { // user already have some products
+                products = JSON.parse(localStorage.getItem('products')); // get it
+                products.forEach(p => {
+                    AddProductToCartModal(p.id, p.name, p.price, p.pic, p.quantity);
+                });
+            }
+        }
+
+        function openCartModal() {
+            if (products === undefined || products.length == 0) {
+                Msg.error("Cart is empty :)", 2000);
+            } else {
+                $('#cartModal').modal('show')
+            }
+        }
+
+
+        function AddProductToCartModal(id, name, price, pic, quantity) {
+
+            var modalHTML = '<div id=carProduct_' + id + ' class="container">' +
+                '    <div class="col mb-4">' +
+                '        <div class="card shadow border-left-primary py-2">' +
+                '            <div class="card-body">' +
+                '                <div class="row align-items-center no-gutters">' +
+                '                    <div class="col mr-2">' +
+                '                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>' + name + '</span></div>' +
+                '                        <div class="text-dark font-weight-bold h5 mb-0"><span>' + price + ' SR</span></div>' +
+                '                        <div class="text-dark font-weight-bold h6 mb-0"><span> ' + quantity + ' Peaces</span></div>' +
+                '                    </div>' +
+                '                    <div class="col-auto"><img src="' + pic + '" style="max-width: 100px;max-height: 100px;" /></div>' +
+                '                </div>' +
+                '                <div class="row d-flex justify-content-center no-gutters" style="padding-top: 5%;">' +
+                '                    <div class="col-auto text-center"><span style="font-size: 25px;"> Total: ' + (quantity * price) + ' SR</span><button class="btn btn-danger" type="button" onclick="deleteFromCart(' + id + ')">Remove Item</button></div>' +
+                '                </div>' +
+                '            </div>' +
+                '        </div>' +
+                '    </div>' +
+                '</div>';
+            $("#CartModalBody").append(modalHTML);
+        }
+
+        function deleteFromCart(id) {
+            // removing product modal from cart
+            var productModal = document.getElementById("carProduct_" + id);
+            productModal.remove();
+            // removing it from the products list
+            for (let index = 0; index < products.length; index++) {
+                if (products[index].id == id) {
+                    products.splice(index, 1);
+                    break;
+                }
+            }
+
+            // updating the storage
+            localStorage.setItem('products', JSON.stringify(products));
+            Msg.success('Product deleted', 2000);
+        }
     </script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
 
@@ -140,24 +140,25 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                                     <div class="col mr-2">
                                         <div class="text-uppercase text-primary font-weight-bold text-xs mb-1">
                                             <span>{{product.name}}</span></div>
-                                            <div 
-                                            class="text-dark font-weight-bold h7 mb-0"><span>Id: {{product.id}}</span>
-                                            </div>
-                                        <div 
-                                        class="text-dark font-weight-bold h5 mb-0"><span>Price: {{product.price}}</span>
+                                        <div class="text-dark font-weight-bold h7 mb-0"><span>Id: {{product.id}}</span>
+                                        </div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span>Price:
+                                                {{product.price}}</span>
                                         </div>
                                         <div class="text-dark font-weight-bold h6 mb-0">
                                             <span>Quantity: {{product.quantity}}</span></div>
                                     </div>
                                     <div class="col-auto">
-                                        <img src="{{product.image_link}}" style="max-width: 100px;max-height: 100px;" /></div>
+                                        <img src="{{product.image_link}}" style="max-width: 100px;max-height: 100px;" />
+                                    </div>
                                 </div>
                                 <div class="row d-flex justify-content-center no-gutters" style="padding-top: 5%;">
                                     <div class="col-auto text-center"><input class="form-control-sm" type="number"
-                                            id="product_{{product.id}}_Q" min="1" max="{{product.quantity}}" step="0" placeholder="1" value="1"><button
-                                            class="btn btn-primary" type="button"
-                                            onclick="addToCart({{product.id}}, '{{product.name}}', {{product.price}}, '{{product.image_link}}')">Add to cart</button>
-                                        </div>
+                                            id="product_{{product.id}}_Q" min="1" max="{{product.quantity}}" step="0"
+                                            placeholder="1" value="1"><button class="btn btn-primary" type="button"
+                                            onclick="addToCart({{product.id}}, '{{product.name}}', {{product.price}}, '{{product.image_link}}')">Add
+                                            to cart</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -167,8 +168,10 @@ function AddProductToCartModal(id, name, price, pic, quantity){
             </div>
             <div class="text-center"><button class="btn btn-primary" type="button" style="width: 25%;margin: 1%;"
                     data-toggle="modal" data-target="#addProductModal">Add</button><button class="btn btn-warning"
-                    type="button" style="width: 25%;margin: 1%;" data-toggle="modal" data-target="#editProductModal">Edit</button>
-                <button class="btn btn-danger" type="button" style="width: 25%;margin: 1%;" data-toggle="modal" data-target="#removeProductModal">Remove</button>
+                    type="button" style="width: 25%;margin: 1%;" data-toggle="modal"
+                    data-target="#editProductModal">Edit</button>
+                <button class="btn btn-danger" type="button" style="width: 25%;margin: 1%;" data-toggle="modal"
+                    data-target="#removeProductModal">Remove</button>
             </div>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
@@ -213,112 +216,71 @@ function AddProductToCartModal(id, name, price, pic, quantity){
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Adding a product</h4><button type="button" class="close"
-                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Adding a product</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <section>
                         <h1 class="text-center text-capitalize">Adding Product</h1>
                         <div class="container">
-                            <div role="dialog" tabindex="-1" class="modal fade show" id="addProductModal"
-                                style="display: block;">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Adding a product</h4><button type="button"
-                                                class="close" data-dismiss="modal" aria-label="Close"><span
-                                                    aria-hidden="true">×</span></button>
+                            <form id="product-add-form" action="/product" method="POST">
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <p><strong>Product ID</strong><span class="text-danger">*</span>
+                                            </p><input type="number" class="form-control" id="productID" name
+                                                required />
                                         </div>
-                                        <div role="dialog" tabindex="-1" class="modal fade show" id="addProductModal"
-                                            style="display: block;">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Adding a product</h4><button
-                                                            type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close"><span
-                                                                aria-hidden="true">×</span></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <section>
-                                                            <h1 class="text-center text-capitalize">Adding Product
-                                                            </h1>
-                                                            <div class="container">
-                                                                <form id="product-add-form" action="/product"
-                                                                    method="POST">
-                                                                    <div class="form-group">
-                                                                        <div class="form-row">
-                                                                            <div class="col">
-                                                                                <p><strong>Product ID</strong><span
-                                                                                        class="text-danger">*</span>
-                                                                                </p><input type="number"
-                                                                                    class="form-control" id="productID"
-                                                                                    name required />
-                                                                            </div>
-                                                                            <div class="col">
-                                                                                <p><strong>Product
-                                                                                        Quantity</strong><span
-                                                                                        class="text-danger">*</span>
-                                                                                </p><input type="number"
-                                                                                    class="form-control"
-                                                                                    id="productQuantity" required
-                                                                                    quantity />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="form-row">
-                                                                            <div class="col">
-                                                                                <p><strong>Product
-                                                                                        Name </strong><span
-                                                                                        class="text-danger">*</span>
-                                                                                </p><input type="text"
-                                                                                    class="form-control"
-                                                                                    id="productDesc" required name />
-                                                                            </div>
-                                                                            <div class="col">
-                                                                                <p><strong>Product
-                                                                                        Price </strong><span
-                                                                                        class="text-danger">*</span>
-                                                                                </p><input type="number"
-                                                                                    class="form-control"
-                                                                                    id="productPrice" required name />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div>
-                                                                            <p><strong>Product image URL</strong><span
-                                                                                    class="text-danger">*</span></p>
-                                                                            <input type="text" class="form-control"
-                                                                                id="productPicture" required name />
-                                                                        </div>
-                                                                    </div>
-                                                            </div>
-                                                            <div class="modal-footer"><button class="btn btn-light"
-                                                                    type="button"
-                                                                    data-dismiss="modal">Close</button><button
-                                                                    class="btn btn-primary" type="submit">ADD</button>
-                                                            </div>
-                                                            </form>
-                                                    </div>
+                                        <div class="col">
+                                            <p><strong>Product
+                                                    Quantity</strong><span class="text-danger">*</span>
+                                            </p><input type="number" class="form-control" id="productQuantity" required
+                                                quantity />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <p><strong>Product
+                                                    Name </strong><span class="text-danger">*</span>
+                                            </p><input type="text" class="form-control" id="productDesc" required
+                                                name />
+                                        </div>
+                                        <div class="col">
+                                            <p><strong>Product
+                                                    Price </strong><span class="text-danger">*</span>
+                                            </p><input type="number" class="form-control" id="productPrice" required
+                                                name />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <p><strong>Product image URL</strong><span class="text-danger">*</span></p>
+                                        <input type="text" class="form-control" id="productPicture" required name />
+                                    </div>
+                                </div>
+                                <div class="modal-footer"><button class="btn btn-light" type="button"
+                                        data-dismiss="modal">Close</button><button class="btn btn-primary"
+                                        type="submit">ADD</button>
+                                </div>
+                            </form>
+                        </div>
                     </section>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </section>
-    </div>
-    </div>
-    </div>
     <div role="dialog" tabindex="-1" class="modal fade show" id="removeProductModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">removing a product</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                    <h4 class="modal-title">removing a product</h4><button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
                 <div class="modal-body">
                     <section>
                         <h1 class="text-center text-capitalize">removing Product</h1>
@@ -327,10 +289,14 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                                 <div class="form-group">
                                     <div class="form-row">
                                         <div class="col">
-                                            <p><strong>Product ID</strong><span class="text-danger">*</span></p><input type="number" class="form-control" id="productID_del" required /></div>
+                                            <p><strong>Product ID</strong><span class="text-danger">*</span></p><input
+                                                type="number" class="form-control" id="productID_del" required />
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-danger" id="deleteProductButton" type="submit">Remove</button></div>
+                                <div class="modal-footer"><button class="btn btn-light" type="button"
+                                        data-dismiss="modal">Close</button><button class="btn btn-danger"
+                                        id="deleteProductButton" type="submit">Remove</button></div>
                             </form>
                         </div>
                     </section>
@@ -338,7 +304,7 @@ function AddProductToCartModal(id, name, price, pic, quantity){
             </div>
         </div>
     </div>
-<!-- Product edit -->
+    <!-- Product edit -->
     <div class="modal fade" role="dialog" tabindex="-1" id="editProductModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -350,102 +316,52 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                     <section>
                         <h1 class="text-center text-capitalize">Edit Product</h1>
                         <div class="container">
-                            <div role="dialog" tabindex="-1" class="modal fade show" id="editProductModal"
-                                style="display: block;">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Editing a product</h4><button type="button"
-                                                class="close" data-dismiss="modal" aria-label="Close"><span
-                                                    aria-hidden="true">×</span></button>
+                            <form id="product-edit-form" action="/product" method="PATCH">
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <p><strong>Product ID</strong><span class="text-danger">*</span>
+                                            </p><input type="number" class="form-control" id="productIDe" name
+                                                required />
                                         </div>
-                                        <div role="dialog" tabindex="-1" class="modal fade show"
-                                            id="editProductModal" style="display: block;">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Editing a product</h4><button
-                                                            type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close"><span
-                                                                aria-hidden="true">×</span></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <section>
-                                                            <h1 class="text-center text-capitalize">Editing Product
-                                                            </h1>
-                                                            <div class="container">
-                                                                <form id="product-edit-form" action="/product"
-                                                                    method="PATCH">
-                                                                    <div class="form-group">
-                                                                        <div class="form-row">
-                                                                            <div class="col">
-                                                                                <p><strong>Product ID</strong><span
-                                                                                        class="text-danger">*</span>
-                                                                                </p><input type="number"
-                                                                                    class="form-control"
-                                                                                    id="productIDe" name required />
-                                                                            </div>
-                                                                            <div class="col">
-                                                                                <p><strong>Product
-                                                                                        Quantity</strong>
-                                                                                </p><input type="number"
-                                                                                    class="form-control"
-                                                                                    id="productQuantitye"
-                                                                                    quantity />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="form-row">
-                                                                            <div class="col">
-                                                                                <p><strong>Product
-                                                                                        Name </strong>
-                                                                                </p><input type="text"
-                                                                                    class="form-control"
-                                                                                    id="productDesce"
-                                                                                    name />
-                                                                            </div>
-                                                                            <div class="col">
-                                                                                <p><strong>Product
-                                                                                        Price </strong>
-                                                                                </p><input type="number"
-                                                                                    class="form-control"
-                                                                                    id="productPricee"
-                                                                                    name />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div>
-                                                                            <p><strong>Product image URL</strong></p>
-                                                                                <input type="text"
-                                                                                class="form-control"
-                                                                                id="productPicturee"
-                                                                                name />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer"><button
-                                                                            class="btn btn-light" type="button"
-                                                                            data-dismiss="modal">Close</button><button
-                                                                            class="btn btn-primary"
-                                                                            type="submit">UPDATE</button></div>
-                                                                </form>
-                                                            </div>
-                                                        </section>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="col">
+                                            <p><strong>Product
+                                                    Quantity</strong>
+                                            </p><input type="number" class="form-control" id="productQuantitye"
+                                                quantity />
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <p><strong>Product
+                                                    Name </strong>
+                                            </p><input type="text" class="form-control" id="productDesce" name />
+                                        </div>
+                                        <div class="col">
+                                            <p><strong>Product
+                                                    Price </strong>
+                                            </p><input type="number" class="form-control" id="productPricee" name />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <p><strong>Product image URL</strong></p>
+                                        <input type="text" class="form-control" id="productPicturee" name />
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-light" type="button"
+                                data-dismiss="modal">Close</button><button class="btn btn-primary"
+                                type="submit">UPDATE</button></div>
+                        </form>
                     </section>
                 </div>
             </div>
         </div>
     </div>
-
 
 
     <script>
@@ -469,9 +385,9 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                     return response.json();
                 })
                 .then(function (jsonResponse) {
-                    if (jsonResponse["success"]!=true){
+                    if (jsonResponse["success"] != true) {
                         Msg.error('Error somewhere :(', 2000);
-                    }else{
+                    } else {
                         Msg.success('Product added', 2000);
                         window.location.reload(true);
                     }
@@ -479,8 +395,8 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                 .catch(function () {
                     Msg.error('Error', 2000);
                 })
-        }        
-    
+        }
+
         document.getElementById('product-edit-form').onsubmit = function (e) {
             e.preventDefault();
 
@@ -502,22 +418,22 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                 })
                 .then(function (jsonResponse) {
                     console.log(jsonResponse);
-                    if (jsonResponse["error"]==404){
+                    if (jsonResponse["error"] == 404) {
                         Msg.error('Error: product with the given id was not found', 2000);
-                    }else{
+                    } else {
                         Msg.success('Product edited', 2000);
                         window.location.reload(true);
-                    } 
+                    }
                 })
                 .catch(function () {
                     Msg.error('Error', 2000);
                 })
-        }      
+        }
 
         document.getElementById('product-delete-form').onsubmit = function (e) {
             e.preventDefault();
             let id = document.getElementById("productID_del").value
-            fetch('/product/'+id, {
+            fetch('/product/' + id, {
                 method: 'DELETE',
                 body: JSON.stringify({
                     'id': id,
@@ -530,17 +446,17 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                     return response.json();
                 })
                 .then(function (jsonResponse) {
-                    if (jsonResponse["error"]==404){
+                    if (jsonResponse["error"] == 404) {
                         Msg.error('Error: product with the given id was not found', 2000);
-                    }else{
+                    } else {
                         Msg.success('Product removed', 2000);
                         window.location.reload(true);
-                    } 
+                    }
                 })
                 .catch(function () {
                     Msg.error('Error', 2000);
                 })
-        }        
+        }
         loadCart();
 
     </script>

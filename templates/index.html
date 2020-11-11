@@ -154,7 +154,7 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                                 </div>
                                 <div class="row d-flex justify-content-center no-gutters" style="padding-top: 5%;">
                                     <div class="col-auto text-center"><input class="form-control-sm" type="number"
-                                            id="product_{{product.id}}_Q" min="1" step="0" placeholder="1" value="1"><button
+                                            id="product_{{product.id}}_Q" min="1" max="{{product.quantity}}" step="0" placeholder="1" value="1"><button
                                             class="btn btn-primary" type="button"
                                             onclick="addToCart({{product.id}}, '{{product.name}}', {{product.price}}, '{{product.image_link}}')">Add to cart</button>
                                         </div>

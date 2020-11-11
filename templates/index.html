@@ -533,7 +533,7 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                     if (jsonResponse["error"]==404){
                         Msg.error('Error: product with the given id was not found', 2000);
                     }else{
-                        Msg.success('Product added', 2000);
+                        Msg.success('Product removed', 2000);
                         window.location.reload(true);
                     } 
                 })

@@ -528,10 +528,8 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                     Msg.error('Error', 2000);
                 })
         }        
+        loadCart();
 
-        $(document).one('ready', function () {
-            loadCart();
-          });
     </script>
 
 </body>

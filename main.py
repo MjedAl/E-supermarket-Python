@@ -27,6 +27,8 @@ def get_product():
 @app.route('/product/<id>', methods=['DELETE'])
 def delete_product(id):
     product = Product.query.get(id)
+    if product is None:
+        abort(404)
     product.delete()
     return jsonify({'success': True})
 
@@ -51,6 +53,8 @@ def edit_product():
         jsonBody = request.get_json()
         id = jsonBody.get('id')
         product = Product.query.get(id)
+        if product is None:
+            abort(404)
 
         price = jsonBody.get('price')
         print(price)

@@ -76,7 +76,7 @@ def edit_product():
         product.update()
         return jsonify({'success': True})
     except:
-        abort(400)
+        abort(404)
 
 @app.errorhandler(400)
 def bad_request(error):

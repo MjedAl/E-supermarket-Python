@@ -469,8 +469,8 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                     return response.json();
                 })
                 .then(function (jsonResponse) {
-                    if (jsonResponse[error]!=200){
-                        Msg.error('Error', 2000);
+                    if (jsonResponse["error"]!=200){
+                        Msg.error('Error somewhere :(', 2000);
                     }else{
                         Msg.success('Product added', 2000);
                     }
@@ -502,7 +502,7 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                 })
                 .then(function (jsonResponse) {
                     console.log(jsonResponse);
-                    if (jsonResponse[success]=='false'){
+                    if (jsonResponse["error"]==404){
                         Msg.error('Error: product with the given id was not found', 2000);
                     }else{
                         Msg.success('Product edited', 2000);
@@ -530,7 +530,7 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                     return response.json();
                 })
                 .then(function (jsonResponse) {
-                    if (jsonResponse[error]==400){
+                    if (jsonResponse["error"]==404){
                         Msg.error('Error: product with the given id was not found', 2000);
                     }else{
                         Msg.success('Product added', 2000);

@@ -8,7 +8,7 @@ from modals import db_drop_and_create_all, setup_db, Product
 app = Flask(__name__)
 setup_db(app)
 
-#db_drop_and_create_all()
+db_drop_and_create_all()
 
 @app.route('/')
 def get_main_page():

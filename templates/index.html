@@ -32,7 +32,7 @@
 
         function addToCart(id, name, price, pic){
             var productQuantity = document.getElementById("product_"+id+"_Q").value;
-          
+            
             if(localStorage.getItem('products')){ // user already have some products
                 products = JSON.parse(localStorage.getItem('products')); // get it
             }
@@ -43,15 +43,20 @@
               'quantity': productQuantity,
               'pic' : pic,
             });
+            console.log(products);
             localStorage.setItem('products', JSON.stringify(products));
             AddProductToCartModal(id, name, price, pic, productQuantity);
             Msg.success('Product added', 2000);
           }
+
+          $(document).one('ready', function () {
+            loadCart();
+          });
           
-          loadCart();
           
           function loadCart(){
             if(localStorage.getItem('products')){ // user already have some products
+              console.log(localStorage.getItem('products'));
               products = JSON.parse(localStorage.getItem('products')); // get it
               products.forEach(p => {
                 AddProductToCartModal(p.id, p.name, p.price, p.pic, p.quantity);

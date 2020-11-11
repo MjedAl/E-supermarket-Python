@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "11678921-675a-4648-b94b-623522ca3b63",
+		"name": "CPIT251-Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f54dee4-2c68-4760-b421-cb983826d9f5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"products\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://e-supermarket.herokuapp.com/product",
+					"protocol": "https",
+					"host": [
+						"e-supermarket",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product posting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ccc5bb7c-6562-418e-a0f7-fbd34bd530ab",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 50,\r\n    \"price\": 12,\r\n    \"des\": \"test\",\r\n    \"picUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://e-supermarket.herokuapp.com/product",
+					"protocol": "https",
+					"host": [
+						"e-supermarket",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product posting-2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b032979-90fb-4bc9-9e04-6f535b1f2702",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://e-supermarket.herokuapp.com/product",
+					"protocol": "https",
+					"host": [
+						"e-supermarket",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product patch",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 50,\r\n    \"des\": \"test-patched\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://e-supermarket.herokuapp.com/product",
+					"protocol": "https",
+					"host": [
+						"e-supermarket",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product patch-2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "020756fb-e7a0-4377-b8ae-018b432aaf3f",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 999,\r\n    \"des\": \"test-will-fail\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://e-supermarket.herokuapp.com/product",
+					"protocol": "https",
+					"host": [
+						"e-supermarket",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product delete-2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b5d9912e-7cc5-48e4-af80-34b93f7de7ba",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://e-supermarket.herokuapp.com/product/50",
+					"protocol": "https",
+					"host": [
+						"e-supermarket",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product",
+						"50"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "099518be-3d76-4088-858d-d1e3f6379af4",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://e-supermarket.herokuapp.com/product/100",
+					"protocol": "https",
+					"host": [
+						"e-supermarket",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product",
+						"100"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

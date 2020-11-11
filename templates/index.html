@@ -501,10 +501,10 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                     return response.json();
                 })
                 .then(function (jsonResponse) {
-                    if (jsonResponse[error]==400){
+                    if (jsonResponse[success]=='false'){
                         Msg.error('Error: product with the given id was not found', 2000);
                     }else{
-                        Msg.success('Product added', 2000);
+                        Msg.success('Product edited', 2000);
                     } 
                     window.location.reload(true);
                 })

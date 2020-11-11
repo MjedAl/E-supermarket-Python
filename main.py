@@ -12,7 +12,7 @@ setup_db(app)
 
 @app.route('/')
 def get_main_page():
-    products = Product.query.all()
+    products = Product.query.all().order_by(Product.id)
     return render_template('index.html', products=[product.short() for product in products]) 
 
 @app.route('/product', methods=['get'])

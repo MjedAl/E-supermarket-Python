@@ -473,8 +473,8 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                         Msg.error('Error somewhere :(', 2000);
                     }else{
                         Msg.success('Product added', 2000);
+                        window.location.reload(true);
                     }
-                    window.location.reload(true);
                 })
                 .catch(function () {
                     Msg.error('Error', 2000);
@@ -506,8 +506,8 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                         Msg.error('Error: product with the given id was not found', 2000);
                     }else{
                         Msg.success('Product edited', 2000);
+                        window.location.reload(true);
                     } 
-                    window.location.reload(true);
                 })
                 .catch(function () {
                     Msg.error('Error', 2000);
@@ -534,8 +534,8 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                         Msg.error('Error: product with the given id was not found', 2000);
                     }else{
                         Msg.success('Product added', 2000);
+                        window.location.reload(true);
                     } 
-                    window.location.reload(true);
                 })
                 .catch(function () {
                     Msg.error('Error', 2000);

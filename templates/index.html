@@ -469,7 +469,7 @@ function AddProductToCartModal(id, name, price, pic, quantity){
                     return response.json();
                 })
                 .then(function (jsonResponse) {
-                    if (jsonResponse["success"]!=True){
+                    if (jsonResponse["success"]!=true){
                         Msg.error('Error somewhere :(', 2000);
                     }else{
                         Msg.success('Product added', 2000);

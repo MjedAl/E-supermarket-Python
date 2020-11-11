@@ -23,15 +23,6 @@ def get_product():
         'products': [product.short() for product in products]
     })
 
-
-@app.route('/product/<id>', methods=['DELETE'])
-def delete_product(id):
-    product = Product.query.get(id)
-    if product is None:
-        abort(404)
-    product.delete()
-    return jsonify({'success': True})
-
 @app.route('/product', methods=['POST'])
 def new_product():
     jsonBody = request.get_json()
@@ -46,6 +37,15 @@ def new_product():
         return jsonify({'success': True})
     except:
          abort(400)
+
+@app.route('/product/<id>', methods=['DELETE'])
+def delete_product(id):
+    product = Product.query.get(id)
+    if product is None:
+        abort(404)
+    product.delete()
+    return jsonify({'success': True})
+
 
 @app.route('/product', methods=['PATCH'])
 def edit_product():

@@ -25,13 +25,13 @@ def get_product():
 
 @app.route('/product', methods=['POST'])
 def new_product():
-    jsonBody = request.get_json()
-    id = jsonBody.get('id')
-    price = jsonBody.get('price')
-    quantity = jsonBody.get('quan')
-    name = jsonBody.get('des')
-    image_link = jsonBody.get('picUrl')
     try:
+        jsonBody = request.get_json()
+        id = jsonBody.get('id')
+        price = jsonBody.get('price')
+        quantity = jsonBody.get('quan')
+        name = jsonBody.get('des')
+        image_link = jsonBody.get('picUrl')
         product = Product(id=id, price=price, quantity=quantity, name=name, image_link=image_link)
         product.insert()
         return jsonify({'success': True})
